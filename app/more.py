@@ -1,6 +1,4 @@
-import pymysql.cursors
 import mysql.connector
-from mysql.connector import errorcode
 import sys
 
 config = {
