@@ -13,11 +13,11 @@ The latest from docker hub
     '''
 ## Test
 
-   '''
-   mysql -h 0.0.0.0 -u root -p -e "SELECT version()"
+    '''
+    mysql -h 0.0.0.0 -u root -p -e "SELECT version()"
        or
-   ./test.test.sh
-   '''
+    ./test.test.sh
+    '''
 
 ## Python test
 
