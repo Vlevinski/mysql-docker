@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Class for DB operation
     https://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlcursor.htmls
     
@@ -33,3 +34,6 @@
     remaining_rows = cursor.fetchall()
            
     '''    
+=======
+# Class for DB operations
+>>>>>>> origin/master

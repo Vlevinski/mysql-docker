@@ -1,87 +1,27 @@
-from mysql.connector import connect, Error
-import sys
+from database import DBHelper
+from sql import customer
 
-# settings
-host = "0.0.0.0"
-port = 3306
-database = "online_movie_rating"
-user = "root"
-password = "root"
+config ={
+    "host":"0.0.0.0",
+    "user":"root",
+    "password":"root",
+    "database":"notes"
+}
 
+db = DBHelper(**config)
 
-def conn():
-    return connect(host=host,
-                   port=port,
-                   user=user,
-                   password=password, )
+qrt = db.fetch("SELECT version();")
+[print(item) for item in qrt]
 
+qrt = db.fetch("SHOW DATABASES;")
+[print(item) for item in qrt]
 
-def conn_db(data_base):
-    return connect(host=host,
-                   port=port,
-                   user=user,
-                   password=password,
-                   database=data_base, )
+qrt = db.fetch("SHOW TABLES;")
+[print(item) for item in qrt]
 
-
-# connection
-def open_connect():
-    try:
-        connection = conn()
-    except Error as e:
-        sys.exit(e)
-    return connection
+qrt = db.fetch("SELECT * FROM user;")
+[print(item) for item in qrt]
 
 
-def create_db():
-    try:
-        connection = conn()
-        create_db_query = "CREATE DATABASE online_movie_rating"
-        cursor = connection.cursor()
-        cursor.execute(create_db_query)
-    except Error as e:
-        sys.exit(e)
 
 
-def execute_db(qrs, data_base):
-    try:
-        connection = conn_db(data_base)
-        create_db_query = qrs
-        cursor = connection.cursor()
-        cursor.execute(create_db_query)
-        [print(item) for item in cursor]
-    except Error as e:
-        sys.exit(e)
-
-
-# show db query
-def show_db():
-    try:
-        connection = conn()
-        show_db_query = "SHOW DATABASES;"
-        cursor = connection.cursor()
-        cursor.execute(show_db_query)
-        [print(item) for item in cursor]
-    except Error as e:
-        sys.exit(e)
-
-
-def select_db(data_base):
-    try:
-        connection = conn_db(data_base)
-        print(connection)
-    except Error as e:
-        sys.exit(e)
-
-
-print("Databases: ")
-show_db()
-
-print("\nUser rows: ")
-db = "notes"
-query = "SELECT * from user;"
-execute_db(query, db)
-
-print("\nMySQL version: ")
-query = "SELECT version();"
-execute_db(query, db)
